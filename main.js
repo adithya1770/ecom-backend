@@ -20,7 +20,7 @@ app.use(session({
     secret:SECRET_KEY,
     resave: false,
     saveUninitialized: true,
-    cookie: {maxAge: 60000}
+    cookie: { secure: false}
 }));
 
 app.use('/ecom', productRoutes);

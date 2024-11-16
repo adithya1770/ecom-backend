@@ -3,14 +3,17 @@ const SECRET_KEY = '0ca906adc9a75aa8b61e9d5b651b22c3a3d05f98fa97edadea465e0aba11
 
 const authLogin = (req, res, next) => {
     try{
-        const token = req.header('Authorization')?.split(' ')[1];
-        if(token && req.session && req.session.username){
-            const verifyLogin = jwt.verify(token, SECRET_KEY);
+        const token = req.session.token;
+        if(req.session && token){
+            const verifyLogin = jwt.verify(req.session.token, SECRET_KEY);
             if(verifyLogin){
                 next();
             }
         }
+        else{
         res.status(401).json({"messsage": "Session Expired"});
+        console.log(req.session);
+        }
     }
     catch(err){
         res.status(400).json({"message": "Error Logging In", "error": err.message});
