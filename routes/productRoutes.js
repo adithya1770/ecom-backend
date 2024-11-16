@@ -9,8 +9,8 @@ require('../auth');
 router.use(cors());
 
 router.get('/', productController.addHomeRoute);
-router.post('/stock', productController.addPdts);
-router.get('/check', authWare, productController.getPdts);
+router.post('/stock', authWare, productController.addPdts);
+router.get('/check',  productController.getPdts);
 router.delete('/destock', productController.pdtDelete);
 router.post('/search', productController.search);
 router.post('/searchbyseller', productController.searchBySeller);
