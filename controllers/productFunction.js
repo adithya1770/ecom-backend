@@ -157,8 +157,7 @@ const addPdts = async (req, res) => {
 const getPdts = async (req, res) => {
     try{
         const pdtsReceived = await Ecom.find();
-        const pdts = await pdtsReceived.map(item=>item.pdtName);
-        res.status(200).json({"data": pdts});
+        res.status(200).json({"data": pdtsReceived});
     }
     catch{
         res.status(400).json({"message": "Couldn't Fetch Inventory"});
