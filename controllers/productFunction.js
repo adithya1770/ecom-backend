@@ -194,8 +194,8 @@ const userWishlist = async (req ,res) => {
 const addWishlist = async (req, res) => {
     try{
         const curUser = req.session.username;
-        const { name, uid } = req.body;
-        const returnedProduct = await Ecom.findOne({ pdtName: name, uniqueId: uid});
+        const { name } = req.body;
+        const returnedProduct = await Ecom.findOne({ pdtName: name });
         if(returnedProduct){
             const requiredUser = await Auth.findOne({ userName: curUser});
             requiredUser.userWishlist.push(returnedProduct.pdtName);
