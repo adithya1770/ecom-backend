@@ -177,7 +177,7 @@ const pdtDelete = async (req, res) => {
 
 const userWishlist = async (req ,res) => {
     try{
-        const curUser = "Adi";
+        const curUser = req.session.username;
         const user = await Auth.findOne({ userName: curUser});
         if(user){
             return res.status(200).json({"data": user.userWishlist});
