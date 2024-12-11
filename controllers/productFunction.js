@@ -198,7 +198,7 @@ const addWishlist = async (req, res) => {
         const returnedProduct = await Ecom.findOne({ pdtName: name });
         if(returnedProduct){
             const requiredUser = await Auth.findOne({ userName: curUser});
-            requiredUser.userWishlist.push(returnedProduct.pdtName);
+            requiredUser.userWishlist.push({"name": returnedProduct.pdtName, "cost": returnedProduct.pdtCost});
             await requiredUser.save();
             return res.status(200).json({ "message": "Product added to wishlist" });
         }
