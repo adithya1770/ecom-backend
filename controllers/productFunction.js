@@ -296,8 +296,7 @@ const checkout = async(req, res) => {
 const checkorder = async (req, res) => {
     try{
         const userName = req.session.username;
-        const orderData = await Order.findOne({consumerName: userName});
-        console.log(orderData, userName);
+        const orderData = await Order.find({consumerName: userName});
         res.status(200).send(orderData);
     }
     catch{
