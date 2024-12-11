@@ -14,5 +14,6 @@ router.get('/check',  productController.getPdts);
 router.delete('/destock', productController.pdtDelete);
 router.post('/search', productController.search);
 router.post('/searchbyseller', productController.searchBySeller);
+router.post('/checkout', productController.checkout);
 
 module.exports = router;

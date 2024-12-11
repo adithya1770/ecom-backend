@@ -1,6 +1,7 @@
 const Ecom = require('../models/ecomSchema');
 const Auth = require('../models/authSchema');
 const Sell = require("../models/sellerSchema");
+const Order = require("../models/orderSchema");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const session = require("express-session")
@@ -274,4 +275,22 @@ const searchBySeller = async(req, res) => {
     }
 }
 
-module.exports = { callback, searchBySeller, search ,removeWishlist, userWishlist, addWishlist, updateUser, homeRoute, addPdts, addHomeRoute, getPdts, pdtDelete, register, login, logout, changePsw, viewUser };
+const checkout = async(req, res) => {
+    try{
+        const userName = req.session.username;
+        const {address, items, cost} = req.body;
+        const newOrder = {
+            consumerName: userName,
+            consumerAddress: address,
+            orderItems: items,
+            totalCost: cost
+        }
+        await Order.create(newOrder);
+        res.status(200).json({"message": "Order Placed Successfully!"});
+    }
+    catch(error){
+        res.status(400).json({"message": "Order couldn't be placed", "error": error})
+    }
+}
+
+module.exports = { checkout, callback, searchBySeller, search ,removeWishlist, userWishlist, addWishlist, updateUser, homeRoute, addPdts, addHomeRoute, getPdts, pdtDelete, register, login, logout, changePsw, viewUser };
