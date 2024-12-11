@@ -218,7 +218,8 @@ const removeWishlist = async (req, res, error) => {
         const userDetails = await Auth.findOne({ userName: curUser});
         console.log(userDetails);
         if(userDetails){
-            const prodIndex = userDetails.userWishlist.indexOf(name);
+            const prodIndex = userDetails.userWishlist.findIndex(item => item.name === name);
+            console.log(prodIndex);
             if(prodIndex != -1){
                 userDetails.userWishlist.splice(prodIndex, 1);
                 await userDetails.save();
