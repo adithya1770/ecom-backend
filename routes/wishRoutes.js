@@ -9,4 +9,4 @@ router.get('/cart', productController.userWishlist);
 router.post('/addproduct', productController.addWishlist);
 router.post('/delete', productController.removeWishlist)
 
-module.exports = router;;
+module.exports = router;
