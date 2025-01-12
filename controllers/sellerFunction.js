@@ -24,7 +24,7 @@ const addSeller = async (req, res) => {
 
 const getSeller = async (req, res) => {
     try{
-        const sellerInfo = await Ecom.find();
+        const sellerInfo = await Sell.find();
         res.status(200).json(sellerInfo);
     }
     catch{
@@ -32,4 +32,20 @@ const getSeller = async (req, res) => {
     }
 }
 
-module.exports = {addSeller, getSeller};
+const verifySeller = async (req, res) => {
+    try{
+        const {name} = req.body;
+        const returnName = await Sell.findOne({sellerName: name});
+        if(returnName){
+            res.status(200).json({"message": "User Found!"});
+        }
+        else{
+            res.status(404).json({"message": "User Not Found."});
+        }
+    }
+    catch{
+        res.status(400).json({"message": "Internal Server Error!"});
+    }
+}
+
+module.exports = {addSeller, getSeller, verifySeller};

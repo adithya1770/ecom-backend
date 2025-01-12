@@ -8,5 +8,6 @@ router.use(cors());
 
 router.post('/add', sellerWare, sellerController.addSeller);
 router.post('/list', sellerController.getSeller);
+router.get('/verify', sellerController.verifySeller);
 
 module.exports = router;
